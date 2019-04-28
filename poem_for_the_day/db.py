@@ -58,5 +58,4 @@ async def get_users(conn):
     records = await conn.execute(
         users.select().order_by(users.c.id)
     )
-    print(records)
     return records

@@ -22,6 +22,7 @@ async def process_start_command(message: types.Message):
         'username': message.from_user.username,
         'first_name': message.from_user.first_name,
         'last_name': message.from_user.last_name,
+        'time': None
     }
 
     async with db['db'].acquire() as conn:
