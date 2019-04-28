@@ -11,6 +11,8 @@ sqlalchemy = "*"
 aiopg = {extras = ["sa"],version = "*"}
 bs4 = "*"
 aiogram = "*"
+pytest = "*"
+pytest-aiohttp = "*"
 
 [requires]
 python_version = "3.7"
