@@ -4,9 +4,9 @@ import os
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import exceptions, executor
-from poem_for_the_day_bot.db import init_pg, close_pg
-from poem_for_the_day_bot.db import get_users as all_users
-from poem_for_the_day_bot.poem import get_poem_today
+from poem_for_the_day.db import init_pg, close_pg
+from poem_for_the_day.db import get_users as all_users
+from poem_for_the_day.poem import get_poem_today
 
 API_TOKEN = os.environ['TOKEN']
 

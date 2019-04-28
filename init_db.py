@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, MetaData
-from poem_for_the_day_bot.db import users
+from poem_for_the_day.db import users
 import os
 
 DSN = "postgresql://{user}:{password}@{host}:{port}/{database}"
