@@ -1,6 +1,6 @@
 import aiohttp
 
-from poem_for_the_day_bot import create_app
+from poem_for_the_day import create_app
 
 app = create_app()
 

@@ -3,11 +3,11 @@ import asyncio
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
-from poem_for_the_day_bot.poem import get_poem_today
+from poem_for_the_day.poem import get_poem_today
 from aiogram.types import ParseMode
 import os
-from poem_for_the_day_bot.db import init_pg, close_pg
-from poem_for_the_day_bot.db import users
+from poem_for_the_day.db import init_pg, close_pg
+from poem_for_the_day.db import users
 
 bot = Bot(token=os.environ['TOKEN'])
 dp = Dispatcher(bot)
