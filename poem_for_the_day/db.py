@@ -15,7 +15,7 @@ users = Table(
     Column('username', String(100), nullable=False),
     Column('first_name', String(100), nullable=False),
     Column('last_name', String(100), nullable=False),
-    Column('last_name', Time, nullable=True)
+    Column('time', Time, nullable=True)
 )
 
 
