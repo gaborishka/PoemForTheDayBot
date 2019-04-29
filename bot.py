@@ -10,8 +10,6 @@ from poem_for_the_day.db import init_pg, close_pg, get_user
 from poem_for_the_day.db import users
 import logging
 
-from logging import Logger
-
 bot = Bot(token=os.environ['TOKEN'])
 dp = Dispatcher(bot)
 
