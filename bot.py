@@ -6,7 +6,7 @@ from aiogram.utils import executor
 from poem_for_the_day.poem import get_poem_today
 from aiogram.types import ParseMode
 import os
-from poem_for_the_day.db import init_pg, close_pg
+from poem_for_the_day.db import init_pg, close_pg, get_user
 from poem_for_the_day.db import users
 import logging
 
@@ -29,12 +29,7 @@ async def process_start_command(message: types.Message):
         'time': None
     }
 
-    async with db['db'].acquire() as conn:
-        try:
-            await conn.execute(users.insert(), [data])
-        except Exception as e:
-            logging.error(str(e))
-            raise e
+    await add_user(data)
 
     await message.reply("Привет!\nЯ буду каждый день присылать тебе ежедневный стих. Со мной ты точно не забудешь "
                         "его прочитать")
@@ -61,8 +56,18 @@ async def echo_message(msg: types.Message):
                                              "ежедневную рассылку.")
 
 
-if __name__ == '__main__':
+async def add_user(data):
+    async with db['db'].acquire() as conn:
+        try:
+            exist = await get_user(conn, data['id'])
+            if not exist:
+                await conn.execute(users.insert(), [data])
+        except Exception as e:
+            logging.error(str(e))
+            raise e
 
+
+if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format="%(message)s", filename='logging.txt')
 
     loop.run_until_complete(init_pg(db))

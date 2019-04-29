@@ -48,8 +48,7 @@ async def get_user(conn, user_id):
     user_record = await result.first()
 
     if not user_record:
-        msg = "User with id: {} does not exists"
-        raise RecordNotFound(msg.format(user_id))
+        return False
 
     return user_record
 
