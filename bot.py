@@ -1,14 +1,16 @@
 import asyncio
+import os
+import logging
+import datetime
+
 
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from poem_for_the_day.poem import get_poem_today
 from aiogram.types import ParseMode
-import os
 from poem_for_the_day.db import init_pg, close_pg, get_user
 from poem_for_the_day.db import users
-import logging
 
 bot = Bot(token=os.environ['TOKEN'])
 dp = Dispatcher(bot)
@@ -66,7 +68,9 @@ async def add_user(data):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG, format="%(message)s", filename='logging.txt')
+
+    today = str(datetime.date.today())
+    logging.basicConfig(level=logging.ERROR, format="%(message)s", filename='./logs/logging-{}.txt'.format(today))
 
     loop.run_until_complete(init_pg(db))
 
