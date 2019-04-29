@@ -8,12 +8,16 @@ from aiogram.types import ParseMode
 import os
 from poem_for_the_day.db import init_pg, close_pg
 from poem_for_the_day.db import users
+import logging
+
+from logging import Logger
 
 bot = Bot(token=os.environ['TOKEN'])
 dp = Dispatcher(bot)
 
 db = dict()
 loop = asyncio.get_event_loop()
+
 
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
@@ -26,7 +30,11 @@ async def process_start_command(message: types.Message):
     }
 
     async with db['db'].acquire() as conn:
-        await conn.execute(users.insert(), [data])
+        try:
+            await conn.execute(users.insert(), [data])
+        except Exception as e:
+            logging.error(str(e))
+            raise e
 
     await message.reply("Привет!\nЯ буду каждый день присылать тебе ежедневный стих. Со мной ты точно не забудешь "
                         "его прочитать")
@@ -54,6 +62,9 @@ async def echo_message(msg: types.Message):
 
 
 if __name__ == '__main__':
+
+    logging.basicConfig(level=logging.DEBUG, format="%(message)s", filename='logging.txt')
+
     loop.run_until_complete(init_pg(db))
 
     executor.start_polling(dp)
