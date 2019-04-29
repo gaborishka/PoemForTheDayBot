@@ -12,7 +12,7 @@ users = Table(
     'users', meta,
 
     Column('id', BigInteger, primary_key=True),
-    Column('username', String(100), nullable=False),
+    Column('username', String(100), nullable=True),
     Column('first_name', String(100), nullable=True),
     Column('last_name', String(100), nullable=True),
     Column('time', Time, nullable=True)
