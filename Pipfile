@@ -13,6 +13,7 @@ bs4 = "*"
 aiogram = "*"
 pytest = "*"
 pytest-aiohttp = "*"
+aiologger = {extras = ["aiofiles"],version = "*"}
 
 [requires]
 python_version = "3.7"
